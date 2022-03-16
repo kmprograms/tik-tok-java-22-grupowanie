@@ -16,6 +16,14 @@ public class App {
                 new Product("E", new BigDecimal("200"))
         );
 
-
+        var maxPriceProducts = products
+                .stream()
+                .collect(Collectors.groupingBy(Product::price))
+                .entrySet()
+                .stream()
+                .max(Map.Entry.comparingByKey())
+                .orElseThrow()
+                .getValue();
+        System.out.println(maxPriceProducts);
     }
 }
